@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filmoteka</title>
+    <link rel="stylesheet" href="./sass/index.scss" />
+  </head>
+  <body>
+    <header>
+      <include src="./partials/header.html"></include>
+    </header>
+    <main>
+  <!--Блок авторизації   -->
+      <h2>Firebase Auth</h2>
+    <form class="signup">
+    <label for="email">email:</label>
+    <input type="email"name="email">
+    <label for="password">password:</label>
+    <input type="password" name="password">
+    <button>signup</button>
+  </form>
+  <!--  --------------------------------  -->
+      <div class="fav-nav">
+        <button class="watched-btn">
+          watched
+          <span class="watched-count"></span>
+        </button>
+        <button class="queue-btn">
+          queue
+          <span class="queue-count"></span>
+        </button>
+      </div>
+      <section class="film-section section">
+        <div class="container">
+          <ul class="film-list"></ul>
+        </div>
+        <div id="tui-pagination-container" class="tui-pagination"></div>
+      </section>
+    </main>
+    <include src="./partials/modal-film-info.html"></include>
+    <script src="/src/js/filmoteka.js" type="module"></script>
+    <script src="/src/js/modal-filmoteka.js" type="module"></script>
+  </body>
+</html>
