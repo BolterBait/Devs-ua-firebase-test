@@ -3,6 +3,7 @@ import { getAnalytics } from "firebase/analytics";
 import {
   getFirestore, collection, getDocs, addDoc, doc, setDoc,
 } from 'firebase/firestore/lite'
+import { refs } from './refs';
 
 
 const firebaseConfig = {
@@ -49,13 +50,16 @@ const db = getFirestore(app)
 
 // Додовання в колекцію з автоID
 const addWatchedFilm = document.querySelector('.modal-film-wrap');
-addWatchedFilm.addEventListener('submit', (e) => {
+addWatchedFilm.addEventListener('click', (e) => {
   e.preventDefault()
+console.log(e.target.id);
   addDoc(colWatchedRef, {
-    id: addWatchedFilm.title.value,
-    adult: addWatchedFilm.author.value,
+    id: e.target.id,
+    
   }).then(() => {
-    addWatchedFilm.reset()
+    refs.watchedHederBtnEl.classList.add('active');
+    refs.watchedHederBtnEl.textContent = 'Remove';
+    // addWatchedFilm.reset()
   })
 })
 
