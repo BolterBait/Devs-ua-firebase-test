@@ -50,7 +50,7 @@ async function onFilmItemClick(event) {
 
   refs.backdropEl.classList.remove('visually-hidden');
   filmArray = backendData.data;
-  console.log(filmArray);
+  console.log(filmArray.genres);
   
 //  getDocs();
 }
@@ -138,3 +138,5 @@ function onModalBtnClick(e) {
     localStorage.setItem('saveDataStorage', JSON.stringify(saveDataStorage));
   }
 }
+
+export { filmArray };

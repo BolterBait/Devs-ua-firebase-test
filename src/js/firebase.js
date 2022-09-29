@@ -4,7 +4,7 @@ import {
   getFirestore, collection, getDocs, addDoc, doc, setDoc,
 } from 'firebase/firestore/lite'
 import { refs } from './refs';
-
+import { filmArray } from './modal-filmoteka';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMQEt78CaPaq3dSOfApmBG4vPslBGp6pQ",
@@ -53,14 +53,17 @@ const addWatchedFilm = document.querySelector('.modal-film-wrap');
 addWatchedFilm.addEventListener('click', (e) => {
   e.preventDefault()
 console.log(e.target.id);
+
   addDoc(colWatchedRef, {
     id: e.target.id,
-    
+    poster_path: filmArray.poster_path,
+    original_title: filmArray.original_title,
+    genres: filmArray.genres,
+    release_date: `${new Date(filmArray.release_date).getFullYear()}`,
   }).then(() => {
-    refs.watchedHederBtnEl.classList.add('active');
-    refs.watchedHederBtnEl.textContent = 'Remove';
-    // addWatchedFilm.reset()
-  })
+    // refs.watchedHederBtnEl.classList.add('active');
+    // refs.watchedHederBtnEl.textContent = 'Remove';
+    })
 })
 
 
