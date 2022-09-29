@@ -3,6 +3,8 @@ import MovieService from './film-api';
 import { genresList } from './genres-list';
 import { title } from 'process';
 import { cleanerMarkup } from './createMarkUp';
+import { getDocs } from 'firebase/firestore';
+
 
 const movieService = new MovieService();
 
@@ -49,6 +51,8 @@ async function onFilmItemClick(event) {
   refs.backdropEl.classList.remove('visually-hidden');
   filmArray = backendData.data;
   console.log(filmArray);
+  
+//  getDocs();
 }
 
 // console.log(await filmArray);

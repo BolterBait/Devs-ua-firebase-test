@@ -4,6 +4,7 @@ import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 import MovieService from './film-api';
 import { cleanerMarkup } from './createMarkUp';
+import { getDocs } from 'firebase/firestore';
 const movieservice = new MovieService();
 // console.log(refs);
 const API_KEY = '74bfe718a55ac7916c6e6ad87b15f944';
@@ -43,6 +44,8 @@ function onPagClick() {
   cleanerMarkup(refs.filmList);
   let markUpValue = markUp2(currentPage);
   renderFilms2(markUpValue);
+  
+  
 }
 
 async function renderFilms2(markUp) {
