@@ -53,12 +53,11 @@ const addWatchedFilm = document.querySelector('.modal-film-wrap');
 addWatchedFilm.addEventListener('click', (e) => {
   e.preventDefault()
 console.log(e.target.id);
-
   addDoc(colWatchedRef, {
     id: e.target.id,
     poster_path: filmArray.poster_path,
     original_title: filmArray.original_title,
-    genres: filmArray.genres,
+    genres: Object.values(filmArray.genres),
     release_date: `${new Date(filmArray.release_date).getFullYear()}`,
   }).then(() => {
     // refs.watchedHederBtnEl.classList.add('active');
