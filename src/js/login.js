@@ -1,8 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence } from "firebase/auth";
-import { doc } from "firebase/firestore/lite";
+import { getAuth,signOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 
-const firebaseConfig = {
+const firebaseConfig = initializeApp({
   apiKey: "AIzaSyBMQEt78CaPaq3dSOfApmBG4vPslBGp6pQ",
   authDomain: "filmoteka-5bf07.firebaseapp.com",
   projectId: "filmoteka-5bf07",
@@ -10,22 +14,24 @@ const firebaseConfig = {
   messagingSenderId: "626342412224",
   appId: "1:626342412224:web:b02b966cc92ff4eefbd225",
   measurementId: "G-X5BM5EZZVP"
-};
+});
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase aaa@ukl.com
+
 
 // Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
-console.log(auth)
+const auth = getAuth(firebaseConfig);
 
 
-const formEl = document.querySelector('.signup')
+const formEl = document.querySelector('.signup') 
 const mail = document.querySelector('#email')
 const pass = document.querySelector('#pass')
 const loginEl = document.querySelector('.login-btn')
+const logoutEl = document.querySelector('.logout-btn')
 
 formEl.addEventListener('submit', formSubmit)
+
+
 
 function formSubmit(e) {
   e.preventDefault()
@@ -35,23 +41,42 @@ function formSubmit(e) {
   formEl.reset()
 }
 
-function createNewAccount(auth, email, password) {
-  const userCredentials = createUserWithEmailAndPassword(auth, email, password)
+async function createNewAccount(auth, email, password) {
+    try {
+        const userCredentials = createUserWithEmailAndPassword(auth, email, password)
+    } catch (error) {
+        console.log(error);
+    }
 }
 // Log-in users
 loginEl.addEventListener('click', onLoginPageSubmit);
 
 function onLoginPageSubmit(e) {
-  e.preventDefault();
+    e.preventDefault()
   const userEmail = mail.value;
   const userPassword = pass.value;
   loginIntoAccount(auth, userEmail, userPassword);
-  formRef.reset();
+  formEl.reset();
 }
 
-function loginIntoAccount(auth, email, password) {
+
+async function loginIntoAccount(auth, email, password) {
+  try {
     auth = getAuth(firebaseConfig);
-    setPersistence(auth, browserLocalPersistence);
-    signInWithEmailAndPassword(auth, email, password);
+    await setPersistence(auth, browserLocalPersistence);
+    await signInWithEmailAndPassword(auth, email, password);
+
     
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Log out users
+
+logoutEl.addEventListener('click', logOutFunction)
+
+function logOutFunction(e) {
+     e.preventDefault()
+    signOut(auth)
 }
